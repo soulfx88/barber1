@@ -1,0 +1,21 @@
+{
+  "name": "Hairzy",
+  "version": "1.0.0",
+  "description": "Bootstrap Website for WrapBootstrap",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "author": "Anton",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-util": "^3.0.8"
+  },
+  "dependencies": {
+    "popper.js": "^1.12.3"
+  }
+}

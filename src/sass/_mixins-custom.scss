@@ -1,0 +1,114 @@
+// =============================================================================
+// MY RESPONSIVE
+// =============================================================================
+
+
+@mixin breakpoint($point) {
+  @if $point == x-large {
+    @media (min-width: 64.375em)  { @content; }
+  }
+  @else if $point == large {
+    @media (min-width: 50em) and (max-width: 64.375em) { @content; }
+  }
+  @else if $point == medium {
+    @media (min-width: 37.5em) and (max-width: 50em) { @content; }
+  }
+  @else if $point == small {
+    @media (max-width: 37.5em)  { @content; }
+  }
+  @else if $point == from-medium {
+    @media (min-width: 37.5em)  { @content; }
+  }
+  @else if $point == from-large {
+    @media (min-width: 50em)  { @content; }
+  }
+   @else if $point == till-medium {
+    @media (max-width: 37.5em)  { @content; }
+  }
+   @else if $point == till-large {
+    @media (max-width: 50em)  { @content; }
+  }
+  
+}
+
+
+
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+
+// =============================================================================
+// Button
+// =============================================================================
+
+
+@mixin button($bg, $radius: 5px) { 
+	color:#fff;
+	text-transform: uppercase;
+	margin: 0 auto;
+	background: $bg;
+	border-radius: $radius;
+	border:none;
+	text-align:center;
+	display:inline-block;
+}
+
+
+
+// =============================================================================
+// BOX SHADOW
+// =============================================================================
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color!important;
+    -moz-box-shadow:inset $top $left $blur $color!important;
+    box-shadow:inset $top $left $blur $color!important;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color!important;
+    -moz-box-shadow: $top $left $blur $color!important;
+    box-shadow: $top $left $blur $color!important;
+  }
+}
