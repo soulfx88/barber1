@@ -5888,8 +5888,7 @@ footer p {
 .navbar-toggler {
   border-color: #af2322; }
   .navbar-toggler i {
-    color: #d14140;
-    text-align: center; }
+    color: #d14140; }
 
 @media (max-width: 50em) {
   .mob-hide {
